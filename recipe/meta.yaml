@@ -1,5 +1,5 @@
 {% set name = "voila" %}
-{% set version = "0.0.6" %}
+{% set version = "0.0.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: c6105d33b62ce8062aa3a1a9c459ab5dc3b63dd086daa38fa5ced1b88ed07466
+  sha256: 7ba3ea37ff5decc49b1c0470532e505d3aabd7ecebb181d8b12bb39066ba4d9e
 
 build:
   number: 0
@@ -23,7 +23,7 @@ requirements:
   run:
     - python >=3
     - nbconvert >=5.4.0,<6
-    - jupyter_server ==0.0.2
+    - jupyter_server ==0.0.3
 
 test:
   imports:
