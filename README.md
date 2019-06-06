@@ -11,22 +11,18 @@ Summary: Rendering of live Jupyter notebooks with interactive widgets
 
 Voila serves live Jupyter notebooks including Jupyter interactive widgets.
 Unlike the usual HTML-converted notebooks, each user connecting to the
-Voila tornado application gets a dedicated Jupyter kernel which can execute
-the callbacks to changes in Jupyter interactive widgets.
+Voila tornado application is associated with a dedicated Jupyter kernel
+which can execute triggered by Jupyter interactive widgets.
 
 By default, voila disallows execute requests from the front-end, disabling
 the ability to execute arbitrary code.
-By defaults, voila runs with the strip_source option, which strips out the
-input cells from the rendered notebook.
 
 
 Current build status
 ====================
 
 
-<table><tr>
-    
-    <td>All platforms:</td>
+<table><tr><td>All platforms:</td>
     <td>
       <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=3656&branchName=master">
         <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/voila-feedstock?branchName=master">
