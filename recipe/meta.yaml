@@ -1,5 +1,5 @@
 {% set name = "voila" %}
-{% set version = "0.1.10" %}
+{% set version = "0.1.9" %}
 
 package:
   name: {{ name|lower }}
@@ -10,7 +10,7 @@ source:
   sha256: e4fc9a981303733ef5184e0860d462843f42dab4176cadd205dfcdf552cbecd8
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
   entry_points:
@@ -24,7 +24,7 @@ requirements:
   run:
     - python >=3
     - nbconvert >=5.5.0,<6
-    - jupyter_server ==0.1.1,<0.2.0
+    - jupyter_server >=0.1.0,<=0.1.1,<0.2.0
     - jupyterlab_pygments >=0.1.0,<0.2
 
 test:
