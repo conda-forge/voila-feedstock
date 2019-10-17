@@ -1,5 +1,5 @@
 {% set name = "voila" %}
-{% set version = "0.1.13" %}
+{% set version = "0.1.14" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 64443e235b82a17e5a0417ba0d69df1f21441de785944b917ba192f6313995f0
+  sha256: 878fa66b16331325028db2e4c9b9d4696fcfc4f33f0ef214be552c89e616aaa4
 
 build:
   number: 0
@@ -34,7 +34,7 @@ test:
     - voila --help
 
 about:
-  home: http://github.com/QuantStack/voila
+  home: https://github.com/voila-dashboards/voila
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
@@ -47,7 +47,7 @@ about:
 
     By default, voila disallows execute requests from the front-end, disabling
     the ability to execute arbitrary code.
-  dev_url: https://github.com/QuantStack/voila
+  dev_url: https://github.com/voila-dashboards/voila
 
 extra:
   recipe-maintainers:
