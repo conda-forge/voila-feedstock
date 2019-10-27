@@ -1,7 +1,7 @@
 About voila
 ===========
 
-Home: http://github.com/QuantStack/voila
+Home: https://github.com/voila-dashboards/voila
 
 Package license: BSD-3-Clause
 
