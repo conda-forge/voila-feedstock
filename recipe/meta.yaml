@@ -24,7 +24,7 @@ requirements:
   run:
     - async_generator
     - python >=3
-    - nbconvert >=5.5.0,<6
+    - nbconvert >=5.6.0,<6
     - jupyter_server >=0.1.0,<0.2.0
     - jupyterlab_pygments >=0.1.0,<0.2
 
