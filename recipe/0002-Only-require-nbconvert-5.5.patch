@@ -1,0 +1,170 @@
+From a4e930ecea69634d4f9779fe7504eb79e0955bd4 Mon Sep 17 00:00:00 2001
+From: Sylvain Corlay <sylvain.corlay@gmail.com>
+Date: Thu, 14 Nov 2019 18:17:30 +0100
+Subject: [PATCH 2/2] Only require nbconvert 5.5
+
+---
+ ...l-error-instruction-configurable-471.patch | 137 ++++++++++++++++++
+ setup.py                                      |   2 +-
+ 2 files changed, 138 insertions(+), 1 deletion(-)
+ create mode 100644 0001-Add-cell-error-instruction-configurable-471.patch
+
+diff --git a/0001-Add-cell-error-instruction-configurable-471.patch b/0001-Add-cell-error-instruction-configurable-471.patch
+new file mode 100644
+index 0000000..0befdc6
+--- /dev/null
++++ b/0001-Add-cell-error-instruction-configurable-471.patch
+@@ -0,0 +1,137 @@
++From 7299bda4688144b7be8fc32daf82e7327218467a Mon Sep 17 00:00:00 2001
++From: Andrew Schlaepfer <andrew.schlaepfer@gmail.com>
++Date: Tue, 12 Nov 2019 05:54:40 -0800
++Subject: [PATCH] Add cell error instruction configurable (#471)
++
++* add cell error instruction configurable in VoilaExecutePreprocessor
++---
++ voila/execute.py | 77 ++++++++++++++++++++++++++----------------------
++ 1 file changed, 42 insertions(+), 35 deletions(-)
++
++diff --git a/voila/execute.py b/voila/execute.py
++index 1f01f9e..de4d1ab 100644
++--- a/voila/execute.py
+++++ b/voila/execute.py
++@@ -13,27 +13,9 @@ from nbconvert.preprocessors import ClearOutputPreprocessor
++ from nbconvert.preprocessors.execute import CellExecutionError, ExecutePreprocessor
++ from nbformat.v4 import output_from_msg
++ 
++-from ipykernel.jsonutil import json_clean
++-
++-
++-def strip_code_cell_errors(cell):
++-    """Strip any error outputs and traceback from a code cell."""
++-    # There is no 'outputs' key for markdown cells
++-    if 'outputs' not in cell:
++-        return cell
++-
++-    outputs = cell['outputs']
+++from traitlets import Unicode
++ 
++-    error_outputs = [output for output in outputs if output['output_type'] == 'error']
++-
++-    error_message = 'There was an error when executing cell [{}]. Please run Voila with --debug to see the error message.'.format(cell['execution_count'])
++-
++-    for output in error_outputs:
++-        output['ename'] = 'ExecutionError'
++-        output['evalue'] = 'Execution error'
++-        output['traceback'] = [error_message]
++-
++-    return cell
+++from ipykernel.jsonutil import json_clean
++ 
++ 
++ def strip_code_cell_warnings(cell):
++@@ -52,19 +34,6 @@ def strip_code_cell_warnings(cell):
++     return cell
++ 
++ 
++-def strip_notebook_errors(nb):
++-    """Strip error messages and traceback from a Notebook."""
++-    cells = nb['cells']
++-
++-    code_cells = [cell for cell in cells if cell['cell_type'] == 'code']
++-
++-    for cell in code_cells:
++-        strip_code_cell_warnings(cell)
++-        strip_code_cell_errors(cell)
++-
++-    return nb
++-
++-
++ def should_strip_error(config):
++     """Return True if errors should be stripped from the Notebook, False otherwise, depending on the current config."""
++     return 'Voila' not in config or 'log_level' not in config['Voila'] or config['Voila']['log_level'] != logging.DEBUG
++@@ -146,6 +115,14 @@ class OutputWidget:
++ 
++ class VoilaExecutePreprocessor(ExecutePreprocessor):
++     """Execute, but respect the output widget behaviour"""
+++    cell_error_instruction = Unicode(
+++        'Please run Voila with --debug to see the error message.',
+++        config=True,
+++        help=(
+++            'instruction given to user to debug cell errors'
+++        )
+++    )
+++
++     def __init__(self, **kwargs):
++         super(VoilaExecutePreprocessor, self).__init__(**kwargs)
++         self.output_hook_stack = collections.defaultdict(list)  # maps to list of hooks, where the last is used
++@@ -160,7 +137,7 @@ class VoilaExecutePreprocessor(ExecutePreprocessor):
++ 
++         # Strip errors and traceback if not in debug mode
++         if should_strip_error(self.config):
++-            strip_notebook_errors(nb)
+++            self.strip_notebook_errors(nb)
++ 
++         return result
++ 
++@@ -176,7 +153,7 @@ class VoilaExecutePreprocessor(ExecutePreprocessor):
++         # Strip errors and traceback if not in debug mode
++         if should_strip_error(self.config):
++             strip_code_cell_warnings(cell)
++-            strip_code_cell_errors(cell)
+++            self.strip_code_cell_errors(cell)
++ 
++         return result
++ 
++@@ -226,6 +203,36 @@ class VoilaExecutePreprocessor(ExecutePreprocessor):
++             return
++         super(VoilaExecutePreprocessor, self).clear_output(outs, msg, cell_index)
++ 
+++    def strip_notebook_errors(self, nb):
+++        """Strip error messages and traceback from a Notebook."""
+++        cells = nb['cells']
+++
+++        code_cells = [cell for cell in cells if cell['cell_type'] == 'code']
+++
+++        for cell in code_cells:
+++            strip_code_cell_warnings(cell)
+++            self.strip_code_cell_errors(cell)
+++
+++        return nb
+++    
+++    def strip_code_cell_errors(self, cell):
+++        """Strip any error outputs and traceback from a code cell."""
+++        # There is no 'outputs' key for markdown cells
+++        if 'outputs' not in cell:
+++            return cell
+++
+++        outputs = cell['outputs']
+++
+++        error_outputs = [output for output in outputs if output['output_type'] == 'error']
+++
+++        error_message = 'There was an error when executing cell [{}]. {}'.format(cell['execution_count'], self.cell_error_instruction)
+++
+++        for output in error_outputs:
+++            output['ename'] = 'ExecutionError'
+++            output['evalue'] = 'Execution error'
+++            output['traceback'] = [error_message]
+++
+++        return cell
++ 
++ def executenb(nb, cwd=None, km=None, **kwargs):
++     resources = {}
++-- 
++2.23.0
++
+diff --git a/setup.py b/setup.py
+index 39d8df7..fbd6116 100644
+--- a/setup.py
++++ b/setup.py
+@@ -376,7 +376,7 @@ setup_args = {
+     },
+     'install_requires': [
+         'jupyter_server>=0.1.0,<0.2.0',
+-        'nbconvert>=5.6.0,<6',
++        'nbconvert>=5.5.0,<6',
+         'jupyterlab_pygments>=0.1.0,<0.2',
+         'pygments>=2.4.1,<3'  # Explicitly requiring pygments which is a second-order dependency.
+                               # An older versions is generally installed already and is otherwise not updated by pip.
+-- 
+2.23.0
+

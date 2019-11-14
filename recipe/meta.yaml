@@ -1,5 +1,7 @@
 {% set name = "voila" %}
 {% set version = "0.1.18" %}
+{% set build = "0" %}
+{% set flavor = flavor or "default"  %}
 
 package:
   name: {{ name|lower }}
@@ -8,9 +10,17 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 715cc0460a5ffa15e8e5f50a3a3664f19e939db3e9fb7e973cb31b6cbb440ea8
+{% if flavor == 'nb4' %}
+  patches:
+    - 0001-Add-cell-error-instruction-configurable-471.patch
+    - 0002-Only-require-nbconvert-5.5.patch
+{% endif %}
 
 build:
-  number: 0
+  number: {{ build }}
+{% if flavor == 'nb4' %}
+  string: "{{ build }}_{{ flavor }}"
+{% endif %}
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
   entry_points:
