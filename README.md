@@ -5,9 +5,11 @@ Home: https://github.com/voila-dashboards/voila
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/voila-feedstock/blob/master/LICENSE.txt)
 
 Summary: Rendering of live Jupyter notebooks with interactive widgets
+
+Development: https://github.com/voila-dashboards/voila
 
 Voila serves live Jupyter notebooks including Jupyter interactive widgets.
 Unlike the usual HTML-converted notebooks, each user connecting to the
