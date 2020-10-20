@@ -34,8 +34,8 @@ requirements:
 outputs:
   - name: voila
     version: {{ version }}
-    script: {{ PYTHON }} -m pip install ./{{ name }} --no-deps --ignore-installed --no-cache-dir -vvv
     build:
+      script: {{ PYTHON }} -m pip install ./{{ name }} --no-deps --ignore-installed --no-cache-dir -vvv
       noarch: python
       entry_points:
         - voila = voila.app:main
