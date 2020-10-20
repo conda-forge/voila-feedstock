@@ -17,17 +17,6 @@ build:
   number: 1
   skip: true
 
-requirements:
-  host:
-    - python >=3.6
-    - pip
-    - nodejs
-  run:
-    - python >=3.6
-    - nbconvert >=6.0.0,<7
-    - jupyter_server >=0.3.0,<2
-    - nbclient >=0.4.0,<0.6
-
 outputs:
   - name: voila
     version: {{ version }}
@@ -36,6 +25,16 @@ outputs:
       noarch: python
       entry_points:
         - voila = voila.app:main
+    requirements:
+      host:
+        - python >=3.6
+        - pip
+        - nodejs
+      run:
+        - python >=3.6
+        - nbconvert >=6.0.0,<7
+        - jupyter_server >=0.3.0,<2
+        - nbclient >=0.4.0,<0.6
     test:
       imports:
         - voila2
