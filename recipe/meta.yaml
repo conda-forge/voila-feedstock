@@ -10,7 +10,7 @@ source:
   sha256: 332725b88fb026ad421db90fdad53d7e8de2ffd03a8584a55d9940465932ede8
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
   entry_points:
@@ -48,6 +48,21 @@ about:
     By default, voila disallows execute requests from the front-end, disabling
     the ability to execute arbitrary code.
   dev_url: https://github.com/voila-dashboards/voila
+
+outputs:
+  - name: voila
+    version: {{ version }}
+    files:
+      - "lib/python{{ PY_VER }}/site-packages/voila"
+  - name: voila-sourcemaps
+    version: {{ version }}
+    build:
+      noarch: python
+    requirements:
+      run:
+        - {{ pin_subpackage('voila', exact=True) }}
+    script: install_sourcemaps.sh
+
 
 extra:
   recipe-maintainers:

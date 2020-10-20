@@ -52,7 +52,7 @@ conda config --add channels conda-forge
 Once the `conda-forge` channel has been enabled, `voila` can be installed with:
 
 ```
-conda install voila
+conda install voila voila-sourcemap
 ```
 
 It is possible to list all of the versions of `voila` available on your platform with:
