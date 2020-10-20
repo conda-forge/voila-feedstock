@@ -38,9 +38,9 @@ outputs:
         - voila = voila.app:main
     test:
       imports:
-        - voila
+        - voila2
       commands:
-        - voila --help
+        - voila2 --help
   - name: voila-sourcemaps
     version: {{ version }}
     build:
