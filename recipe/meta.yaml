@@ -33,6 +33,26 @@ test:
   commands:
     - voila --help
 
+outputs:
+  - name: voila
+    version: {{ version }}
+    files:
+      - "bin/voila"
+      - "lib/python{{ PY_VER }}/site-packages/voila"
+      - "share/jupyter/voila/"
+      - "etc/jupyter"
+  - name: voila-sourcemaps
+    version: {{ version }}
+    build:
+      noarch: python
+    requirements:
+      host:
+        - python
+      run:
+        - python
+        - {{ pin_subpackage('voila', exact=True) }}
+    script: install_sourcemaps.sh
+
 about:
   home: https://github.com/voila-dashboards/voila
   license: BSD-3-Clause
@@ -48,21 +68,6 @@ about:
     By default, voila disallows execute requests from the front-end, disabling
     the ability to execute arbitrary code.
   dev_url: https://github.com/voila-dashboards/voila
-
-outputs:
-  - name: voila
-    version: {{ version }}
-    files:
-      - "lib/python{{ PY_VER }}/site-packages/voila"
-  - name: voila-sourcemaps
-    version: {{ version }}
-    build:
-      noarch: python
-    requirements:
-      run:
-        - {{ pin_subpackage('voila', exact=True) }}
-    script: install_sourcemaps.sh
-
 
 extra:
   recipe-maintainers:

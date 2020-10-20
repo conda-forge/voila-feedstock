@@ -2,5 +2,5 @@
 
 set -euo pipefail
 
-mkdir -p $PREFIX/lib/share/jupyter/voila/templates/base/static
-cp $SRC_DIR/lib/share/jupyter/voila/templates/base/static/*.map $PREFIX/lib/share/jupyter/voila/templates/base/static
+mkdir -p $PREFIX/share/jupyter/voila/templates/base/static
+cp $SRC_DIR/share/jupyter/voila/templates/base/static/*.map $PREFIX/share/jupyter/voila/templates/base/static
