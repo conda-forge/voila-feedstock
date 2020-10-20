@@ -44,16 +44,14 @@ outputs:
   - name: voila-sourcemaps
     version: {{ version }}
     build:
+      script: {{ PYTHON }} -m pip install ./{{ name }}-sourcemaps --no-deps --ignore-installed --no-cache-dir -vvv
       noarch: python
     requirements:
       host:
         - python
         - pip
-        - nodejs
       run:
-        - python
         - {{ pin_subpackage('voila', exact=True) }}
-    script: install_sourcemaps.sh
 
 about:
   home: https://github.com/voila-dashboards/voila
