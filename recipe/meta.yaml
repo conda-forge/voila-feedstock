@@ -6,13 +6,15 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 332725b88fb026ad421db90fdad53d7e8de2ffd03a8584a55d9940465932ede8
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    folder: {{ name }}
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-sourcemaps-{{ version }}.tar.gz
+    folder: {{ name }}-sourcemaps
 
 build:
   number: 1
   noarch: python
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+  script: (cd {{name}} && {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv))
   entry_points:
     - voila = voila.app:main
 
