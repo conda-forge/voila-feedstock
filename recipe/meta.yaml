@@ -37,9 +37,9 @@ outputs:
         - nbclient >=0.4.0,<0.6
     test:
       imports:
-        - voila2
+        - voila
       commands:
-        - voila2 --help
+        - voila --help
   - name: voila-sourcemaps
     version: {{ version }}
     build:
@@ -51,6 +51,8 @@ outputs:
         - pip
       run:
         - {{ pin_subpackage('voila', exact=True) }}
+    test:
+      - test -f "${PREFIX}/share/jupyter/voila/templates//base/static/voila.js.map"
 
 about:
   home: https://github.com/voila-dashboards/voila
