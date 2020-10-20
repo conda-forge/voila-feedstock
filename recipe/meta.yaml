@@ -61,7 +61,7 @@ about:
   home: https://github.com/voila-dashboards/voila
   license: BSD-3-Clause
   license_family: BSD
-  license_file: LICENSE
+  license_file: voila/LICENSE
   summary: Rendering of live Jupyter notebooks with interactive widgets
   description: |
     Voila serves live Jupyter notebooks including Jupyter interactive widgets.
