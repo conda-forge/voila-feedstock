@@ -48,6 +48,8 @@ outputs:
     requirements:
       host:
         - python
+        - pip
+        - nodejs
       run:
         - python
         - {{ pin_subpackage('voila', exact=True) }}
