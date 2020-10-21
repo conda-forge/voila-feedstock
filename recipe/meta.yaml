@@ -15,13 +15,12 @@ source:
 
 build:
   number: 1
-  skip: true
 
 outputs:
   - name: voila
     version: {{ version }}
+    script: $PYTHON -m pip install ./{{ name }} --no-deps --ignore-installed --no-cache-dir -vvv
     build:
-      script: {{ PYTHON }} -m pip install ./{{ name }} --no-deps --ignore-installed --no-cache-dir -vvv
       noarch: python
       entry_points:
         - voila = voila.app:main
@@ -39,8 +38,8 @@ outputs:
       script: run_test_voila.sh
   - name: voila-sourcemaps
     version: {{ version }}
+    script: $PYTHON -m pip install ./{{ name }}-sourcemaps --no-deps --ignore-installed --no-cache-dir -vvv
     build:
-      script: {{ PYTHON }} -m pip install ./{{ name }}-sourcemaps --no-deps --ignore-installed --no-cache-dir -vvv
       noarch: python
     requirements:
       host:
