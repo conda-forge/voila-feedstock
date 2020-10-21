@@ -19,7 +19,7 @@ build:
 outputs:
   - name: voila
     version: {{ version }}
-    script: $PYTHON -m pip install ./{{ name }} --no-deps --ignore-installed --no-cache-dir -vvv
+    script: install_voila.sh
     build:
       noarch: python
       entry_points:
@@ -35,10 +35,11 @@ outputs:
         - jupyter_server >=0.3.0,<2
         - nbclient >=0.4.0,<0.6
     test:
-      script: run_test_voila.sh
+      commands:
+        - run_test_voila.sh
   - name: voila-sourcemaps
     version: {{ version }}
-    script: $PYTHON -m pip install ./{{ name }}-sourcemaps --no-deps --ignore-installed --no-cache-dir -vvv
+    script: install_voila-sourcemaps.sh
     build:
       noarch: python
     requirements:
