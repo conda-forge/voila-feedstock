@@ -1,8 +1,11 @@
 {% set name = "voila" %}
 {% set version = "0.2.4" %}
 
+# this recipe fetches both voila and voila-sourcemaps (which are released in tandom)
+
 package:
-  name: feedstock-{{ name|lower }}
+  # the package name should not equal any of the output names, otherwise the tests do not run
+  name: {{ name|lower }}-combined
   version: {{ version }}
 
 source:
