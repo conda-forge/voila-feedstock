@@ -2,6 +2,5 @@
 
 set -euxo pipefail
 
-foo
-python -c "import voila2"
-voila2 --help
+python -c "import voila"
+voila --help
