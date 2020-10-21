@@ -2,7 +2,7 @@
 {% set version = "0.2.4" %}
 
 package:
-  name: {{ name|lower }}
+  name: feedstock-{{ name|lower }}
   version: {{ version }}
 
 source:
