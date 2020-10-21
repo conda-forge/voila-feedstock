@@ -16,6 +16,10 @@ source:
 build:
   number: 1
 
+test:
+  commands:
+    - echo "Tests are done in the outputs"
+
 outputs:
   - name: voila
     version: {{ version }}
