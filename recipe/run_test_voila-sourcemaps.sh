@@ -1,5 +1,5 @@
 #!/bin/bash
 
-set -euo pipefail
+set -euxo pipefail
 
-test -f "${PREFIX}/share/jupyter/voila/templates//base/static/voila.js-NONEXISTING.map"
+test -f "${PREFIX}/share/jupyter/voila/templates//base/static/voila.js.map"

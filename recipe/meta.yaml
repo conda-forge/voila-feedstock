@@ -35,8 +35,7 @@ outputs:
         - jupyter_server >=0.3.0,<2
         - nbclient >=0.4.0,<0.6
     test:
-      commands:
-        - run_test_voila.sh
+      script: run_test_voila.sh
   - name: voila-sourcemaps
     version: {{ version }}
     script: install_voila-sourcemaps.sh
