@@ -21,6 +21,7 @@ requirements:
     - python >=3.6
     - pip
     - nodejs
+    - jupyter-packaging >=0.7.9,<1
   run:
     - python >=3.6
     - nbconvert >=6.0.0,<7
