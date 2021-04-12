@@ -1,5 +1,5 @@
 {% set name = "voila" %}
-{% set version = "0.2.7" %}
+{% set version = "0.2.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 7c143142c24c3672b2e101e0887e679e2e3daa7ff865d2bb69d32616de242ed7 
+  sha256: 9b937b384c2e32a0101eafa00edd6a5cb483fea3e458a483b29d5cc30e78f634
 
 build:
   number: 0
@@ -33,7 +33,7 @@ test:
     - voila
   commands:
     - voila --help
-  
+
 
 about:
   home: https://github.com/voila-dashboards/voila
