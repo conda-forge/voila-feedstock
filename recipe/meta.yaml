@@ -10,7 +10,7 @@ source:
   sha256: 030ad8a6f84462fd3f7c9debaedef9937b9fc332e416fff2bfd1ba12eabba0ca
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
   entry_points:
@@ -25,6 +25,7 @@ requirements:
   run:
     - python >=3.6
     - nbconvert >=6.0.0,<7
+    - jupyter_client >=6.1.3,<7
     - jupyter_server >=0.3.0,<2
     - nbclient >=0.4.0,<0.6
 
