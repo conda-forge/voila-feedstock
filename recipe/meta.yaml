@@ -1,5 +1,5 @@
 {% set name = "voila" %}
-{% set version = "0.2.11" %}
+{% set version = "0.2.12" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 030ad8a6f84462fd3f7c9debaedef9937b9fc332e416fff2bfd1ba12eabba0ca
+  sha256: d7e87e63acf0cf8cedb7c5082e6d10b5e3a85f351c5e2a67cacc381bb4df95d4
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
   entry_points:
@@ -21,7 +21,7 @@ requirements:
     - python >=3.6
     - pip
     - nodejs <16
-    - jupyter-packaging >=0.7.9,<0.8
+    - jupyter-packaging >=0.10,<1
   run:
     - python >=3.6
     - nbconvert >=6.0.0,<7
