@@ -1,5 +1,5 @@
 {% set name = "voila" %}
-{% set version = "0.2.12" %}
+{% set version = "0.2.13" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d7e87e63acf0cf8cedb7c5082e6d10b5e3a85f351c5e2a67cacc381bb4df95d4
+  sha256: 4a0ec9b67604da43648d8fdff931b4fbcbd74953af9b87853b75fa5630a06721
 
 build:
   number: 0
