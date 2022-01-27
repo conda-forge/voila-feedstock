@@ -131,5 +131,6 @@ Feedstock Maintainers
 * [@SylvainCorlay](https://github.com/SylvainCorlay/)
 * [@jtpio](https://github.com/jtpio/)
 * [@maartenbreddels](https://github.com/maartenbreddels/)
+* [@martinRenou](https://github.com/martinRenou/)
 * [@trungleduc](https://github.com/trungleduc/)
 
