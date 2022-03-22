@@ -31,6 +31,8 @@ requirements:
     - nbclient >=0.4.0,<0.6
     - websockets >=9
     - traitlets >=5.0.3,<6
+  run_constrained:
+    - ipywidgets <8
 
 test:
   imports:
