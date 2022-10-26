@@ -21,7 +21,7 @@ requirements:
     - python >=3.7
     - pip
     - nodejs <16
-    - jupyter-packaging >=0.10,<1
+    - hatchling
   run:
     - python >=3.7
     - nbconvert >=6.4.5,<8
