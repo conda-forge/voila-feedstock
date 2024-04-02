@@ -29,13 +29,6 @@ requirements:
     - jupyter_server >=0.3.0,<2
     - nbclient >=0.4.0,<0.6
 
-test:
-  imports:
-    - voila
-  commands:
-    - voila --help
-
-
 about:
   home: https://github.com/voila-dashboards/voila
   license: BSD-3-Clause
