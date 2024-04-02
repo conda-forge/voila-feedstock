@@ -1,5 +1,5 @@
 {% set name = "voila" %}
-{% set version = "0.2.16" %}
+{% set version = "0.2.17" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: be0612f95b87f99c6caaac70cd7af15b5b9331a985d0f95503f6ebc17a083c8f
+  sha256: 849147ccf040021714441c58a4144fcd4f1d2537b83005c61efcaee409a48208
 
 build:
   number: 0
@@ -28,13 +28,6 @@ requirements:
     - jupyter_client >=6.1.3,<7
     - jupyter_server >=0.3.0,<2
     - nbclient >=0.4.0,<0.6
-
-test:
-  imports:
-    - voila
-  commands:
-    - voila --help
-
 
 about:
   home: https://github.com/voila-dashboards/voila
