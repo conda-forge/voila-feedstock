@@ -1,5 +1,5 @@
 {% set name = "voila" %}
-{% set version = "0.4.4" %}
+{% set version = "0.4.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8475c3250245716fd192e80cd6ce265b7effb2a2e389dc0374853e0ee9e4a440
+  sha256: 00d372dfc9bb0de74cc092f5be9d93e2b5626703ec719419a97e76b8c60d83fd
 
 build:
   number: 0
@@ -33,14 +33,14 @@ requirements:
     - nbclient >=0.4.0,<0.8
     - websockets >=9
     - traitlets >=5.0.3,<6
-  run_constrained:
-    - ipywidgets =8
 
 test:
   imports:
     - voila
   commands:
     - voila --help
+    - test -f ${PREFIX}/share/jupyter/labextensions/@voila-dashboards/jupyterlab-preview/package.json                            # [unix]
+    - if not exist %PREFIX%\\share\\jupyter\\labextensions\\@voila-dashboards\\jupyterlab-preview\\package.json (exit 1)          # [win]
 
 
 about:
