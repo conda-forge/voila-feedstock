@@ -39,6 +39,8 @@ test:
     - voila
   commands:
     - voila --help
+    - test -f ${PREFIX}/share/jupyter/labextensions/@voila-dashboards/jupyterlab-preview/package.json                            # [unix]
+    - if not exist %PREFIX%\\share\\jupyter\\labextensions\\@voila-dashboards\\jupyterlab-preview\\package.json (exit 1)          # [win]
 
 
 about:
