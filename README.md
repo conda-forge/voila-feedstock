@@ -161,6 +161,3 @@ Feedstock Maintainers
 * [@martinRenou](https://github.com/martinRenou/)
 * [@trungleduc](https://github.com/trungleduc/)
 
-
-<!-- dummy commit to enable rerendering -->
-
